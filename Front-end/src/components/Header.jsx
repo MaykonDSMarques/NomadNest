@@ -1,16 +1,21 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <div className="shadow-md">
-      <div className="max-w-7x1 mx-auto flex items-center justify-between px-8 py-4">
-        <div className="flex items-center">
+    <header className="shadow-md">
+      <div className="max-w-7x1 mx-auto flex items-center justify-between px-4 py-4 sm:px-8">
+        <Link to="/" className="flex items-center">
           <img className="h-10" src="  " alt="logo do site" />
           <p className="text-primary-400 text-2xl font-bold">NomadNest</p>{" "}
-          {/*nome do site*/}git restore --staged
-        </div>
+          {/*nome do site*/}
+        </Link>
+
         {/*search menu*/}
-        <div className="flex items-center rounded-full border border-gray-300 py-2 pr-4 pl-6 shadow-md">
+        <Link
+          to="/"
+          className="hidden items-center rounded-full border border-gray-300 py-2 pr-4 pl-6 shadow-md lg:flex"
+        >
           <p className="border-r border-r-gray-300 pr-4">Qualquer Lugar</p>
           <p className="border-r border-r-gray-300 px-4">Qualaquer Semana</p>
           <p className="px-4">Hóspedes</p>
@@ -30,10 +35,14 @@ const Header = () => {
               />
             </svg>
           </div>
-        </div>
+        </Link>
         {/*search menu end*/}
+
         {/*User menu*/}
-        <div className="flex items-center gap-2 rounded-full border border-gray-300 py-2 pr-4 pl-6 shadow-md">
+        <Link
+          to="/Login"
+          className="flex items-center gap-2 rounded-full border border-gray-300 py-2 pr-4 pl-6 shadow-md"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -59,11 +68,11 @@ const Header = () => {
               clipRule="evenodd"
             />
           </svg>
-          <p className="px-4">Hóspedes</p>
-        </div>
+          <p className="max-w-20 truncate sm:max-w-32">Hóspedes</p>
+        </Link>
         {/*user menu end*/}
       </div>
-    </div>
+    </header>
   );
 };
 
