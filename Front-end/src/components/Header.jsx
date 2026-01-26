@@ -6,8 +6,7 @@ const Header = () => {
     <header className="shadow-md">
       <div className="max-w-7x1 mx-auto flex items-center justify-between px-4 py-4 sm:px-8">
         <Link to="/" className="flex items-center">
-          <img className="h-10" src="  " alt="logo do site" />
-          <p className="text-primary-400 text-2xl font-bold">NomadNest</p>{" "}
+          <img className="h-50" src="Logo/logo.png" alt="logo do site" />
           {/*nome do site*/}
         </Link>
 
