@@ -10,21 +10,22 @@ const Register = ({ setUser }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    /*if (email && password) {
+    if (email && password && name) {
       try {
-        const { data: userDoc } = await axios.post("/users/login", {
+        const { data: userDoc } = await axios.post("/users", {
           email,
           password,
+          name,
         });
 
         setUser(userDoc);
         setRedirect(true);
       } catch (error) {
-        alert(`Login failed: ${error.response.data}`);
+        alert(`Accout Creation Failed: ${JSON.stringify(error)}`);
       }
     } else {
-      alert("Email and/or Password required");
-    }*/
+      alert("Email, Name and/or Password required");
+    }
   };
 
   if (redirect) return <Navigate to="/" />;
