@@ -24,12 +24,15 @@ router.get("/profile", async (req, res) => {
   const { token } = req.cookies;
 
   if (token) {
-    try {
-      const userInfo = jwt.verify(token, JWT_SECRET_KEY);
-      res.json(userInfo);
-    } catch (error) {
-      res.status(500).json(error);
-    }
+    const userInfo = jwt.verify(
+      token,
+      JWT_SECRET_KEY,
+      {},
+      (error, userInfo) => {
+        if (error) throw error;
+        res.json(userInfo);
+      },
+    );
   } else {
     res.json(null);
   }
@@ -50,10 +53,13 @@ router.post("/", async (req, res) => {
     const { _id } = newUserDoc;
 
     const newUserObj = { _id, name, email };
-    const token = jwt.sign(newUserObj, JWT_SECRET_KEY);
-    res.cookie("token", token).json(newUserObj);
+    const token = jwt.sign(newUserObj, JWT_SECRET_KEY, {}, (error, token) => {
+      if (error) throw error;
+      res.cookie("token", token).json(newUserObj);
+    });
   } catch (error) {
     res.status(500).json(error);
+    throw error;
   }
 });
 
@@ -72,14 +78,18 @@ router.post("/login", async (req, res) => {
         const token = jwt.sign(newUserObj, JWT_SECRET_KEY);
         res.cookie("token", token).json(newUserObj);
       } else {
-        res.status(400).json("seha invalida!");
+        res.status(400).json("Invalid password!");
       }
     } else {
-      res.status(400).json("Usuário Não encontrado!");
+      res.status(400).json("User not Found!");
     }
   } catch (error) {
     res.status(500).json(error);
   }
+});
+
+router.post("/logout", (req, res) => {
+  res.clearCookie("token").json("Successfully signed out");
 });
 
 export default router;
