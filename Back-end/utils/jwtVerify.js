@@ -1,0 +1,42 @@
+import "dotenv/config";
+import { json } from "express";
+import jwt from "jsonwebtoken";
+
+const { JWT_SECRET_KEY } = process.env;
+
+export const JWTVerify = (req) => {
+  const { token } = req.cookies;
+
+  if (token) {
+    return new Promise((resolve, reject) => {
+      jwt.verify(token, JWT_SECRET_KEY, {}, (error, userInfo) => {
+        if (error) {
+          console.error("JWT Error", error);
+          reject(error);
+        }
+
+        resolve(userInfo);
+      });
+    });
+  } else {
+    return null;
+  }
+};
+
+export const JWTSign = (newUserObj) => {
+  return new Promise((resolve, reject) => {
+    jwt.sign(
+      newUserObj,
+      JWT_SECRET_KEY,
+      { expiresIn: "1d" },
+      (error, token) => {
+        if (error) {
+          console.error("SingIn Error", error);
+          reject(error);
+        }
+
+        resolve(token);
+      },
+    );
+  });
+};
