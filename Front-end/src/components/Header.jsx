@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useUserContext } from "../contexts/UserContext";
+import logo from "../assets/logo.png";
 
 const Header = () => {
   const { user } = useUserContext();
@@ -8,7 +9,7 @@ const Header = () => {
     <header className="shadow-md">
       <div className="max-w-7x1 mx-auto flex items-center justify-between px-4 py-4 sm:px-8">
         <Link to="/" className="flex items-center">
-          <img className="h-50" src="Logo/logo.png" alt="logo do site" />
+          <img className="h-50" src={logo} alt="logo do site" />
           {/*nome do site*/}
         </Link>
 
